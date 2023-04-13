@@ -49,6 +49,7 @@ dpf_add_plugin(${PROJECT_NAME}
     FILES_DSP
         plugin/triceratops.cpp
         plugin/engine.cpp
+    FILES_COMMON
         plugin/params.cpp
 )
 
