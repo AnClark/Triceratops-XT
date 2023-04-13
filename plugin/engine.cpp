@@ -294,7 +294,7 @@ void Triceratops::run(float* output_left, float* output_right, uint32_t n_sample
 
         // midi note depressed
 
-        else if (data[0] == 0x80 + midi_channel || (data[0] & 0xF0 == 0x90 && data[2] == 0)) {
+        else if (data[0] == 0x80 + midi_channel || ((data[0] & 0xF0) == 0x90 && data[2] == 0)) {
             for (int x = 0; x < max_notes; x++) {
                 if (self->synths[x]->midi_key == data[1]) {
                     self->synths[x]->midi_key         = -1;
