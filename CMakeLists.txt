@@ -51,7 +51,12 @@ dpf_add_plugin(${PROJECT_NAME}
         plugin/engine.cpp
     FILES_COMMON
         plugin/params.cpp
+        plugin/presets.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC "plugin/")
 target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}-core)
+
+# Built-in factory presets support
+include(FactoryPresets)
+
