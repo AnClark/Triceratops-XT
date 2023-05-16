@@ -27,7 +27,7 @@
 #define DISTRHO_PLUGIN_URI     "https://github.com/anclark/triceratops-xt"
 #define DISTRHO_PLUGIN_CLAP_ID "thunderox.triceratops"
 
-#define DISTRHO_PLUGIN_HAS_UI       0
+#define DISTRHO_PLUGIN_HAS_UI       1
 #define DISTRHO_UI_USE_NANOVG       0
 #define DISTRHO_PLUGIN_HAS_EMBED_UI 1
 #define DISTRHO_PLUGIN_IS_RT_SAFE   1
@@ -38,6 +38,12 @@
 
 #define DISTRHO_UI_DEFAULT_WIDTH  700
 #define DISTRHO_UI_DEFAULT_HEIGHT 390
+
+// Enable Dear ImGui support
+// See dpf/distrho/DistrhoInfo.hpp for more details.
+#define DISTRHO_UI_USE_CUSTOM          1
+#define DISTRHO_UI_CUSTOM_INCLUDE_PATH "DearImGui.hpp"
+#define DISTRHO_UI_CUSTOM_WIDGET_TYPE  DGL_NAMESPACE::ImGuiTopLevelWidget
 
 #endif // DISTRHO_PLUGIN_INFO_H_INCLUDED
 
