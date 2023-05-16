@@ -4,3 +4,6 @@
 [submodule "src"]
 	path = src
 	url = https://github.com/thunderox/triceratops
+[submodule "ext/dpf_widgets"]
+	path = ext/dpf_widgets
+	url = https://github.com/DISTRHO/DPF-Widgets.git
