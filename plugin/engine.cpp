@@ -79,7 +79,7 @@ Triceratops::Triceratops(double rate)
     self->sample_rate = rate;
 
     for (int x = 0; x < max_notes; ++x) {
-        self->synths[x] = new synth(rate, "DPF instance"); // bundle path is not actually used by synth
+        self->synths[x] = std::make_unique<synth>(rate, "DPF instance"); // bundle path is not actually used by synth
     }
 
     self->lfo1 = new LFO(rate);
@@ -123,8 +123,12 @@ Triceratops::~Triceratops()
     delete (self->nixnoise);
 
     for (int x = 0; x < max_notes; x++) {
+        // The original LV2 plugin does not cleaned up synth cells.
+        // That should be necessary with DPF here.
 
-        // delete(self->synths[x]);
+        // NOTE: Now synth cells are managed by unique pointers.
+        //       It will be automatically cleaned up.
+        // delete (self->synths[x]);
     }
 
     free(self->lfo1_out);
@@ -133,6 +137,16 @@ Triceratops::~Triceratops()
     delete (self->lfo1);
     delete (self->lfo2);
     delete (self->lfo3);
+
+    // The original LV2 plugin does not cleaned up reverb and EQ instances.
+    // Maybe I should clean up them as well.
+
+    for (int x = 0; x < 16; x++) {
+        delete (self->reverb[x]);
+    }
+
+    delete (self->eq_left);
+    delete (self->eq_right);
 }
 
 void Triceratops::run(float* output_left, float* output_right, uint32_t n_samples, const MidiEvent* midiEvents, uint32_t midiEventCount)

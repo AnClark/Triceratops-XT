@@ -80,7 +80,7 @@ private:
     float* pitch_bend;
     float* channel_after_touch;
 
-    synth* synths[max_notes];
+    std::unique_ptr<synth> synths[max_notes];
 
     nixecho* echo;
     noise*   nixnoise;
