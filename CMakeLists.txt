@@ -27,6 +27,12 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 add_subdirectory(dpf)
 
+option(TR_USE_EXTERNAL_CATEGORY_FILE "Use external preset category file (upstream behavior), otherwise use built-in one" OFF)
+option(TR_BUILTIN_FACTORY_PRESETS "Embed factory presets into plugin" ON)
+
+configure_file(config.h.in ${PROJECT_BINARY_DIR}/config.h)
+include_directories(${PROJECT_BINARY_DIR})
+
 include_directories(
     src/
     src/dsp/
