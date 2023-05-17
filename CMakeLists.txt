@@ -52,6 +52,14 @@ add_library(${PROJECT_NAME}-core STATIC
     src/synth.cpp
 )
 
+# Workaround for `uint` not being recognized on Win32
+if(WIN32)
+    target_compile_definitions(${PROJECT_NAME}-core PRIVATE uint=unsigned\ int)
+endif()
+
+# Workaround for LV2 headers on systems without LV2 SDK installed
+include(LV2HeaderWorkaround)
+
 dpf_add_plugin(${PROJECT_NAME}
     TARGETS vst2 vst3 lv2 clap
     FILES_DSP
