@@ -26,6 +26,7 @@ project(Triceratops
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 add_subdirectory(dpf)
+set(DPF_WIDGETS_PATH ext/dpf_widgets)
 
 option(TR_USE_EXTERNAL_CATEGORY_FILE "Use external preset category file (upstream behavior), otherwise use built-in one" OFF)
 option(TR_BUILTIN_FACTORY_PRESETS "Embed factory presets into plugin" ON)
@@ -68,10 +69,24 @@ dpf_add_plugin(${PROJECT_NAME}
     FILES_COMMON
         plugin/params.cpp
         plugin/presets.cpp
+    FILES_UI
+        ${DPF_WIDGETS_PATH}/opengl/DearImGui.cpp
+        plugin/triceratops_ui.cpp
+        ui/EditorUI.cpp
+        ui/Menus.cpp
+        ui/Utils.cpp
 )
 
-target_include_directories(${PROJECT_NAME} PUBLIC "plugin/")
+target_include_directories(${PROJECT_NAME} PUBLIC
+    "plugin/"
+    "ui/"
+)
 target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}-core)
+
+# Introduce DPF's Dear ImGui headers
+target_include_directories (${PROJECT_NAME} PUBLIC ${DPF_WIDGETS_PATH}/generic)
+target_include_directories (${PROJECT_NAME} PUBLIC ${DPF_WIDGETS_PATH}/opengl)
+target_include_directories(${PROJECT_NAME} PUBLIC ${DPF_WIDGETS_PATH}/opengl/DearImGui)
 
 # Built-in factory presets support
 include(FactoryPresets)
