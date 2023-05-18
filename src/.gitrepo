@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/ThunderOX/Triceratops
+	branch = master
+	commit = 2421639ab5ee92616891f416b5a7547b48a15533
+	parent = 5c69971b666fd4b0b9d29a2c3e544cc91f39f8a7
+	method = merge
+	cmdver = 0.4.6
