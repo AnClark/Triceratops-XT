@@ -1740,6 +1740,11 @@ osc_t* synth::osc_Create(double rate)
 // add impulse into buffer
 void synth::osc_AddBLEP(osc_t *lpO, double offset, double amp)
 {
+// Sanity check.
+// KTABLE*offset may be a very large value by accident. This will crash Triceratops.
+if (KTABLE*offset > gMinBLEP.c)
+	return;
+
 int i;
 double *lpOut=lpO->buffer+lpO->iBuffer;
 double *lpIn=gMinBLEP.lpTable+(uint)(KTABLE*offset);
